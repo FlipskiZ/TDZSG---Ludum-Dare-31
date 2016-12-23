@@ -29,7 +29,7 @@ void PlayState::init(){
     boughtWeapon = true, leveledSkill = true;
     tierWeapon = 0, tierSkill = 0;
 
-    enemySpawnRateHelper = 0, enemySpawnRate = 60, pauseBetweenWavesActive = true, pauseBetweenWavesHelper = 900, enemySpawnAll = false, amountEnemiesSpawned = 0, amountEnemiesSpawn = 10, enemySpeed = 1, enemyMoney = 1, enemyExperience = 1, enemyDamage = 1, enemyHealth = 1;
+    enemySpawnRateHelper = 0, enemySpawnRate = 90, pauseBetweenWavesActive = true, pauseBetweenWavesHelper = 900, enemySpawnAll = false, amountEnemiesSpawned = 0, amountEnemiesSpawn = 10, enemySpeed = 1, enemyMoney = 1, enemyExperience = 1, enemyDamage = 1, enemyHealth = 1;
     winStatement = false, loseStatement = false, paused = false;
     wave = 0;
 
@@ -152,7 +152,8 @@ void PlayState::update(Engine* engine){
     }else if(al_key_down(&keyState, ALLEGRO_KEY_ESCAPE)){
         if(lastKeyPress != ALLEGRO_KEY_ESCAPE){
             //engine->pushState(MenuState::instance());
-            engine->changeState(PlayState::instance());
+            //engine->changeState(PlayState::instance());
+            paused = !paused;
             lastKeyPress = ALLEGRO_KEY_ESCAPE;
         }
     }else if(al_key_down(&keyState, ALLEGRO_KEY_F)){
@@ -190,7 +191,7 @@ void PlayState::update(Engine* engine){
         }
     }else if(al_key_down(&keyState, ALLEGRO_KEY_P)){
         if(lastKeyPress != ALLEGRO_KEY_P){
-            paused = !paused;
+            engine->changeState(PlayState::instance());
 
             lastKeyPress = ALLEGRO_KEY_P;
         }
@@ -282,18 +283,18 @@ void PlayState::update(Engine* engine){
     }else if(amountEnemiesSpawned >= amountEnemiesSpawn && !pauseBetweenWavesActive){
         pauseBetweenWavesActive = true;
         if(wave % 10 == 0){
-            enemySpeed = ceil(enemySpeed*1.5);
+            enemySpeed = ceil(enemySpeed*1.4);
         }
         if(wave % 5 == 0){
-            enemyMoney *= 2;
-            enemyExperience *= 2;
+            enemyMoney *= 2.2;
+            enemyExperience *= 2.2;
         }
 
         if(wave % 5 == 0){
             enemyDamage += 1;
         }
         if(wave != 1 && wave != 2 && wave != 3){
-            enemyHealth = wave/4+pow(1.1, wave);
+            enemyHealth = wave/4+pow(1.0875, wave);
         }
         if(wave % 2 == 0 && enemySpawnRate > 2){
             enemySpawnRate = floor(enemySpawnRate/1.3);
@@ -627,13 +628,13 @@ void PlayState::draw(Engine* engine){
     al_draw_textf(smallFont, al_map_rgb(150, 150, 150), screenWidth-60, screenHeight-40, NULL, "vol %d", (int)round(volumeLevel*100));
     if(winStatement){
         al_draw_textf(bigFont, al_map_rgb(0, 0, 0), mapDisplayWidth/2, mapDisplayHeight/2-36, ALLEGRO_ALIGN_CENTER, "YOU WON");
-        al_draw_textf(defaultFont, al_map_rgb(0, 0, 0), mapDisplayWidth/2, mapDisplayHeight/2+12, ALLEGRO_ALIGN_CENTER, "Press escape to restart");
+        al_draw_textf(defaultFont, al_map_rgb(0, 0, 0), mapDisplayWidth/2, mapDisplayHeight/2+12, ALLEGRO_ALIGN_CENTER, "Press P to restart");
     }else if(loseStatement){
         al_draw_textf(bigFont, al_map_rgb(0, 0, 0), mapDisplayWidth/2, mapDisplayHeight/2-36, ALLEGRO_ALIGN_CENTER, "YOU LOST");
-        al_draw_textf(defaultFont, al_map_rgb(0, 0, 0), mapDisplayWidth/2, mapDisplayHeight/2+12, ALLEGRO_ALIGN_CENTER, "Press escape to restart");
+        al_draw_textf(defaultFont, al_map_rgb(0, 0, 0), mapDisplayWidth/2, mapDisplayHeight/2+12, ALLEGRO_ALIGN_CENTER, "Press P to restart");
     }else if(paused){
         al_draw_textf(bigFont, al_map_rgb(0, 0, 0), mapDisplayWidth/2, mapDisplayHeight/2-36, ALLEGRO_ALIGN_CENTER, "PAUSED");
-        al_draw_textf(defaultFont, al_map_rgb(0, 0, 0), mapDisplayWidth/2, mapDisplayHeight/2+12, ALLEGRO_ALIGN_CENTER, "Press P to unpause");
+        al_draw_textf(defaultFont, al_map_rgb(0, 0, 0), mapDisplayWidth/2, mapDisplayHeight/2+12, ALLEGRO_ALIGN_CENTER, "Press Escape to unpause");
     }
     fpsTimeNew = al_get_time();
     fpsCounter = 1/(fpsTimeNew - fpsTimeOld);

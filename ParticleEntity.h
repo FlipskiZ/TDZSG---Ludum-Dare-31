@@ -16,7 +16,6 @@ class ParticleEntity : public Entity{
     protected:
     private:
         int duration;
-        int durationHelper;
 
         int value1;
 
@@ -24,6 +23,10 @@ class ParticleEntity : public Entity{
         float deltaX, deltaY;
 
         float drag;
+
+        bool colX, colY;
+
+        float creationTime;
 };
 
 #endif // PARTICLEENTITY_H

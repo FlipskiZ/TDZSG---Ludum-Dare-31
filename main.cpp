@@ -8,7 +8,7 @@ struct TILE_TYPE{
 	bool isPassable;
 };
 
-bool isPassable(float x, float y, float width, float height, float deltaX, float deltaY);
+bool isPassable(float x, float y, float width, float height);
 bool checkCollision(float x, float y, float ex, float ey, float width, float height, float ewidth, float eheight);
 bool insideMap(float x, float y, float width, float height);
 void addButtonToList(Button *newButton);
@@ -79,8 +79,8 @@ int mapArrayRotation[mapArrayWidth][mapArrayHeight];
 int weaponArray[5][3][9] =  {{{0, 20, 1, 10, 60, 8, 0, 10, 1}, {0, 10, 1, 6, 90, 16, 0, 20, 2}, {0, 30, 2, 20, 120, 16, 0, 30, 2}},
                             {{0, 20, 4, 6, 60, 16, 0, 45, 5}, {2, 20, 2, 25, 90, 24, 1, 60, 2}, {3, 60, 2, 2, 60, 24, 0, 60, 2}},
                             {{0, 15, 5, 12, 90, 24, 0, 80, 6}, {2, 7, 2, 20, 60, 24, 1, 115, 4}, {1, 30, 2, 4, 75, 24, 0, 130, 3}},
-                            {{2, 5, 2, 50, 120, 32, 1, 200}, {1, 20, 1, 12, 45, 32, 1, 300, 3}, {4, 30, 3, 3, 120, 8, 0, 400, 10}},
-                            {{5, 2, 4, 1000, 180, 32, 1, 1000, 8}, {4, 2, 3, 200, 120, 8, 1, 1500, 7}, {6, 60, 5, 1, 60, 0, 0, 2000, 15}}};
+                            {{2, 5, 2, 50, 120, 32, 1, 200, 3}, {1, 20, 1, 12, 45, 32, 1, 300, 3}, {4, 30, 3, 3, 120, 8, 0, 400, 10}},
+                            {{5, 2, 4, 1000, 180, 32, 1, 800, 8}, {4, 2, 3, 200, 120, 8, 1, 1250, 7}, {6, 60, 5, 1, 60, 0, 0, 1500, 15}}};
 
 ///maxHealth;meleeDamage;maxStamina;maxMovementSpeed;
 float skillArray[5][3][4] = {{{1.5, 1, 1, 1}, {1, 2, 1, 1}, {1, 1, 1.5, 1}},
@@ -131,7 +131,7 @@ int main(){
 
     //Timestep Variables
     double t = 0.0;
-    double dt = 1/60.0;
+    double dt = 1/LogicFPS;
 
     double currentTime = 0.0;
     double newTime = 0.0;

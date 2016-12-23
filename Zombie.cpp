@@ -130,7 +130,7 @@ void Zombie::update(){
                     newParticle->setDimensions(2+random%7, 2+random%7);
                     newParticle->setMovementSpeed(3+random%8);
                     newParticle->setDrag(0.85 + random%10/(float)100);
-                    newParticle->setDuration(30+random%91);
+                    newParticle->setDuration(2500+random%91);
                     newParticle->setAngle(this->angle-22.5*toRadians+(random%45)*toRadians);
                     newParticle->setTypeId(1);
                     addParticleToList(newParticle);

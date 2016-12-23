@@ -81,7 +81,7 @@ void PistolBullet::update(){
                             newParticle->setDimensions(2+this->random%7, 2+this->random%7);
                             newParticle->setMovementSpeed(this->movementSpeed/2-this->movementSpeed/6+this->random%(int)round(this->movementSpeed/3+1));
                             newParticle->setDrag(0.85 + this->random%11/(float)100);
-                            newParticle->setDuration(30+this->random%91);
+                            newParticle->setDuration(2500+this->random%91);
                             newParticle->setAngle(this->angle-22.5*toRadians+(random%46)*toRadians);
                             newParticle->setTypeId(0);
                             addParticleToList(newParticle);
@@ -136,7 +136,7 @@ void PistolBullet::update(){
                             newParticle->setDimensions(2+random%7, 2+random%7);
                             newParticle->setMovementSpeed(5+random%11);
                             newParticle->setDrag(0.9 + random%6/(float)100);
-                            newParticle->setDuration(60+random%61);
+                            newParticle->setDuration(2500+random%61);
                             newParticle->setAngle(rand()%361*toRadians);
                             newParticle->setTypeId(0);
                             addParticleToList(newParticle);

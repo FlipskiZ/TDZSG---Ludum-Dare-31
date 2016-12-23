@@ -3,13 +3,15 @@
 
 ParticleEntity::ParticleEntity(){
     this->duration = 0;
-    this->durationHelper = 0;
     this->drag = 0;
     this->movementSpeed = 0;
     this->deltaX = 0;
     this->deltaY = 0;
     this->value1 = 0;
     this->random = rand();
+    this->colX = false;
+    this->colY = false;
+    this->creationTime = 0;
 }
 void ParticleEntity::setMovementSpeed(float movementSpeed){
     this->movementSpeed = movementSpeed;
@@ -19,6 +21,7 @@ void ParticleEntity::setDrag(float drag){
 }
 void ParticleEntity::setDuration(int duration){
     this->duration = duration;
+    this->creationTime = al_get_time();
 }
 void ParticleEntity::setValue(int value){
     this->value1 = value;
@@ -30,13 +33,25 @@ void ParticleEntity::update(){
     this->deltaX = sin(this->angle) * this->movementSpeed;
     this->deltaY = -cos(this->angle) * this->movementSpeed;
 
-    this->posX += this->deltaX;
-    this->posY += this->deltaY;
+    if(this->typeId == 0 || this->typeId == 1){
+        if(isPassable(this->posX + this->deltaX, this->posY, this->width, this->height) && !this->colX){
+            this->posX += this->deltaX;
+        }else if(!this->colX){
+            this->colX = true;
+        }
 
-    if(this->durationHelper >= this->duration){
-        this->active = false;
+        if(isPassable(this->posX, this->posY + this->deltaY, this->width, this->height) && !this->colY){
+            this->posY += this->deltaY;
+        }else if(!this->colY){
+            this->colY = true;
+        }
     }else{
-        this->durationHelper++;
+        this->posX += this->deltaX;
+        this->posY += this->deltaY;
+    }
+
+    if((float)this->creationTime+(float)this->duration/LogicFPS <= (float)al_get_time()){
+        this->active = false;
     }
 }
 

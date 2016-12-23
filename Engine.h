@@ -17,8 +17,8 @@
 #include <vector>
 #include <fstream>
 
-#include "Button.h"
 #include "Player.h"
+#include "Button.h"
 #include "PistolBullet.h"
 #include "DebugClass.h"
 #include "Zombie.h"
@@ -41,11 +41,12 @@
 #define MAX_BUTTONS 25
 #define MAX_LIVING 300
 #define MAX_MISSILES 300
-#define MAX_PARTICLES 1000
+#define MAX_PARTICLES 5000
 #define MAX_PLAYERS 1
 #define MAX_DEBUG 0
 
 #define FPS 60.0
+#define LogicFPS 60.0
 
 using namespace std;
 
