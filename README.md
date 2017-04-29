@@ -15,11 +15,11 @@ F - Melee
 G - Dynamite 
 LMB - Shoot 
 LSHIFT - Sprint 
-P - Pause game 
+ESC - Pause game 
 N - Next Wave (Post-Compo) 
 , (comma) - Decrease volume 
 . (full stop) - Increase volume 
-ESC - Restart game (No prompt!) 
+P - Restart game (No prompt!) 
 
 Prices:
 Ammo +10 - 1$ 
